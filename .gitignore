@@ -1,0 +1,15 @@
+*.stash
+build/debug/
+build/release/
+test/CuteDataTest.vcxproj
+test/CuteDataTest.vcxproj.filters
+test/debug/
+test/release/
+src/CuteData.vcxproj
+src/CuteData.vcxproj.filters
+*.db
+*.vcxproj
+*.opendb
+*.rc
+build/target_wrapper.bat
+*.filters
