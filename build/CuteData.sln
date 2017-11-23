@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CuteData", "CuteData.vcxproj", "{973D385A-0528-3733-9A79-D13F3EC6711D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCuteData", "TestCuteData.vcxproj", "{422637E2-81CA-3CAB-AFE3-A013500F18B2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{973D385A-0528-3733-9A79-D13F3EC6711D} = {973D385A-0528-3733-9A79-D13F3EC6711D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

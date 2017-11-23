@@ -2,7 +2,7 @@
 #include "dataobject.h"
 #include "datatypes.h"
 
-class User : public DataObject
+class User : public CuteData::DataObject
 {
     Q_OBJECT
     QD_PROPERTY(name, QString, m_name)

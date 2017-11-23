@@ -2,7 +2,7 @@
 #include "dataobject.h"
 #include "datatypes.h"
 
-class Comment : public DataObject
+class Comment : public CuteData::DataObject
 {
     Q_OBJECT
     QD_PROPERTY(body, QString, m_body)

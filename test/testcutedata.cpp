@@ -10,6 +10,7 @@
 #include <QTest>
 #include <QScopedPointer>
 
+using namespace CuteData;
 
 TestCuteData::TestCuteData()
     : m_pDataManager(nullptr)

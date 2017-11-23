@@ -30,59 +30,62 @@
     Q_CLASSINFO(#name, "N-N:" #classname ":" #inverse)
 
 
-class DataManager;
-class DataObject;
-typedef QSharedPointer<DataObject> DataObjectPtr;
-typedef QSharedPointer<const DataObject> ConstDataObjectPtr;
-typedef QList<DataObjectPtr> DataObjects;
-
-class CUTEDATA_API DataObject : public QObject, public QEnableSharedFromThis<DataObject>
+namespace CuteData
 {
-    Q_OBJECT
-    QD_PROPERTY(id, qint64, m_id)
+    class DataManager;
+    class DataObject;
+    typedef QSharedPointer<DataObject> DataObjectPtr;
+    typedef QSharedPointer<const DataObject> ConstDataObjectPtr;
+    typedef QList<DataObjectPtr> DataObjects;
 
-public:
-    Q_INVOKABLE DataObject();
-    virtual ~DataObject();
-
-    DataManager * dataManager() const { return m_pDataManager; }
-    qint64 id() const { return m_id; }
-
-    void read();
-    void update();
-    void del(bool cascade = true);
-
-    template <class T>
-    QSharedPointer<T> one(const QString &relationshipName) const
+    class CUTEDATA_API DataObject : public QObject, public QEnableSharedFromThis<DataObject>
     {
-        DataObjectPtr pDataObject = one(&T::staticMetaObject, relationshipName);
-        return pDataObject.dynamicCast<T>();
-    }
+        Q_OBJECT
+            QD_PROPERTY(id, qint64, m_id)
 
-    void setOne(const QString &relationshipName, DataObjectPtr pTargetObject);
+    public:
+        Q_INVOKABLE DataObject();
+        virtual ~DataObject();
 
-    template <class T>
-    QList<QSharedPointer<T>> many(const QString &relationshipName) const
-    {
-        DataObjects objects = many(&T::staticMetaObject, relationshipName);
+        DataManager * dataManager() const { return m_pDataManager; }
+        qint64 id() const { return m_id; }
 
-        QList<QSharedPointer<T>> list;
-        for (auto &pObject : objects)
-            list.append(pObject.dynamicCast<T>());
+        void read();
+        void update();
+        void del(bool cascade = true);
 
-        return list;
-    }
+        template <class T>
+        QSharedPointer<T> one(const QString &relationshipName) const
+        {
+            DataObjectPtr pDataObject = one(&T::staticMetaObject, relationshipName);
+            return pDataObject.dynamicCast<T>();
+        }
 
-    void add(const QString &relationshipName, DataObjectPtr pObject);
-    void remove(const QString &relationshipName, DataObjectPtr pObject);
-    void removeAll(const QString &relationshipName);
+        void setOne(const QString &relationshipName, DataObjectPtr pTargetObject);
 
-private:
-    DataObjectPtr one(const QMetaObject *pMetaObject, const QString &name) const;
-    DataObjects many(const QMetaObject *pMetaObject, const QString &name) const;
+        template <class T>
+        QList<QSharedPointer<T>> many(const QString &relationshipName) const
+        {
+            DataObjects objects = many(&T::staticMetaObject, relationshipName);
 
-private:
-    friend class DataManager;
-    DataManager *m_pDataManager;
-};
+            QList<QSharedPointer<T>> list;
+            for (auto &pObject : objects)
+                list.append(pObject.dynamicCast<T>());
 
+            return list;
+        }
+
+        void add(const QString &relationshipName, DataObjectPtr pObject);
+        void remove(const QString &relationshipName, DataObjectPtr pObject);
+        void removeAll(const QString &relationshipName);
+
+    private:
+        DataObjectPtr one(const QMetaObject *pMetaObject, const QString &name) const;
+        DataObjects many(const QMetaObject *pMetaObject, const QString &name) const;
+
+    private:
+        friend class DataManager;
+        DataManager *m_pDataManager;
+    };
+
+}

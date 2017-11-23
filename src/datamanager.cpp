@@ -10,6 +10,8 @@
 #include <QColor>
 #include <QDebug>
 
+namespace CuteData
+{
 
 class Relationship
 {
@@ -1142,4 +1144,5 @@ void DataManager::removeAll(DataObjectPtr pObject, const QString &relationshipNa
             }
         }
     }
+}
 }

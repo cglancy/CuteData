@@ -6,7 +6,7 @@
 #include <QDateTime>
 #include <QColor>
 
-class Class1 : public DataObject
+class Class1 : public CuteData::DataObject
 {
     Q_OBJECT
     Q_PROPERTY(QString stringValue READ stringValue WRITE setStringValue)
@@ -85,5 +85,5 @@ private slots:
     void testDataModel();
 
 private:
-    DataManager *m_pDataManager;
+    CuteData::DataManager *m_pDataManager;
 };
