@@ -24,10 +24,10 @@ SOURCES += comment.cpp \
 INCLUDEPATH += ../src
 
 CONFIG(debug, debug|release) {
-    LIBS += -L./debug -lCuteData0
-    PRE_TARGETDEPS += ./debug/CuteData0.dll
+    LIBS += -L../src/debug -lCuteData0
+    PRE_TARGETDEPS += ../src/debug/CuteData0.dll
 }
 else {
-    LIBS += -L./release -lCuteData0
-    PRE_TARGETDEPS += ./release/CuteData0.dll
+    LIBS += -L../src/release -lCuteData0
+    PRE_TARGETDEPS += ../src/release/CuteData0.dll
 }
