@@ -25,7 +25,7 @@
 #include <QColor>
 #include <QDebug>
 
-namespace CuteData
+namespace cg
 {
 
 class Relationship

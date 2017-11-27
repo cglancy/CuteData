@@ -13,7 +13,7 @@
 * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-#include "testcutedata.h"
+#include "datatest.h"
 #include "datamanager.h"
 #include "user.h"
 #include "post.h"
@@ -25,18 +25,18 @@
 #include <QTest>
 #include <QScopedPointer>
 
-using namespace CuteData;
+using namespace cg;
 
-TestCuteData::TestCuteData()
+DataTest::DataTest()
     : m_pDataManager(nullptr)
 {
 }
 
-TestCuteData::~TestCuteData()
+DataTest::~DataTest()
 {
 }
 
-void TestCuteData::init()
+void DataTest::init()
 {
     if (m_pDataManager)
         return;
@@ -59,7 +59,7 @@ void TestCuteData::init()
     m_pDataManager->open(filePath);
 }
 
-void TestCuteData::cleanup()
+void DataTest::cleanup()
 {
     if (m_pDataManager)
     {
@@ -69,7 +69,7 @@ void TestCuteData::cleanup()
     }
 }
 
-void TestCuteData::testClass1Class2()
+void DataTest::testClass1Class2()
 {
     QString testString("String1");
     bool testBool = true;
@@ -137,7 +137,7 @@ void TestCuteData::testClass1Class2()
     QCOMPARE(count, 0);
 }
 
-void TestCuteData::testDataModel()
+void DataTest::testDataModel()
 {
     // create
     {

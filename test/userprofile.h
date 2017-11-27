@@ -13,14 +13,14 @@
 * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-#ifndef CUTEDATA_USERPROFILE_H
-#define CUTEDATA_USERPROFILE_H
+#ifndef CGDATA_USERPROFILE_H
+#define CGDATA_USERPROFILE_H
 #pragma once
 
 #include "dataobject.h"
 #include "datatypes.h"
 
-class UserProfile : public CuteData::DataObject
+class UserProfile : public cg::DataObject
 {
     Q_OBJECT
     QD_PROPERTY(address, QString, m_address)
@@ -35,4 +35,4 @@ public:
     void setAddress(const QString &address) { m_address = address; }
 };
 
-#endif // CUTEDATA_USERPROFILE_H
+#endif // CGDATA_USERPROFILE_H

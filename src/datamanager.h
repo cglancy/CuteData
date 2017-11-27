@@ -13,11 +13,11 @@
 * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-#ifndef CUTEDATA_DATAMANAGER_H
-#define CUTEDATA_DATAMANAGER_H
+#ifndef CGDATA_DATAMANAGER_H
+#define CGDATA_DATAMANAGER_H
 #pragma once
 
-#include "cutedata.h"
+#include "cgdata.h"
 #include "dataobject.h"
 
 #include <QPointer>
@@ -26,13 +26,13 @@
 #include <QVariant>
 #include <QPair>
 
-namespace CuteData
+namespace cg
 {
 
     class Table;
     class Relationship;
 
-    class CUTEDATA_API DataManager : public QObject
+    class CGDATA_API DataManager : public QObject
     {
         Q_OBJECT
     public:
@@ -130,4 +130,4 @@ namespace CuteData
 
 }
 
-#endif // CUTEDATA_DATAMANAGER_H
+#endif // CGDATA_DATAMANAGER_H

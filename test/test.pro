@@ -1,33 +1,33 @@
-QT       += core sql testlib
+QT += core sql testlib
 
-TARGET = TestCuteData
-CONFIG   += testcase 
+TARGET = cgDataTest
+CONFIG += testcase 
 
 TEMPLATE = app
 
-HEADERS +=  comment.h \
+HEADERS += datatest.h \
+	comment.h \
 	datatypes.h \
 	post.h \
 	tag.h \
-    testcutedata.h \
 	user.h \
 	userprofile.h
 	
-SOURCES += comment.cpp \
+SOURCES += datatest.cpp \
+	comment.cpp \
     main.cpp \
 	post.cpp \
 	tag.cpp \
-    testcutedata.cpp \
 	user.cpp \
 	userprofile.cpp
 
 INCLUDEPATH += ../src
 
 CONFIG(debug, debug|release) {
-    LIBS += -L../src/debug -lCuteData0
-    PRE_TARGETDEPS += ../src/debug/CuteData0.dll
+    LIBS += -L../src/debug -lcgData0
+    PRE_TARGETDEPS += ../src/debug/cgData0.dll
 }
 else {
-    LIBS += -L../src/release -lCuteData0
-    PRE_TARGETDEPS += ../src/release/CuteData0.dll
+    LIBS += -L../src/release -lcgData0
+    PRE_TARGETDEPS += ../src/release/cgData0.dll
 }

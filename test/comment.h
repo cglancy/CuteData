@@ -13,14 +13,14 @@
 * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-#ifndef CUTEDATA_COMMENT_H
-#define CUTEDATA_COMMENT_H
+#ifndef CGDATA_COMMENT_H
+#define CGDATA_COMMENT_H
 #pragma once
 
 #include "dataobject.h"
 #include "datatypes.h"
 
-class Comment : public CuteData::DataObject
+class Comment : public cg::DataObject
 {
     Q_OBJECT
     QD_PROPERTY(body, QString, m_body)
@@ -36,4 +36,4 @@ public:
     void setBody(const QString &body) { m_body = body; }
 };
 
-#endif // CUTEDATA_COMMENT_H
+#endif // CGDATA_COMMENT_H

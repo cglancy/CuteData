@@ -19,7 +19,7 @@
 #include <QMetaObject>
 #include <QMetaClassInfo>
 
-namespace CuteData
+namespace cg
 {
     DataObject::DataObject()
         : m_pDataManager(nullptr), m_id(0)

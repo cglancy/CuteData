@@ -13,14 +13,14 @@
 * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-#ifndef CUTEDATA_TAG_H
-#define CUTEDATA_TAG_H
+#ifndef CGDATA_TAG_H
+#define CGDATA_TAG_H
 #pragma once
 
 #include "dataobject.h"
 #include "datatypes.h"
 
-class Tag : public CuteData::DataObject
+class Tag : public cg::DataObject
 {
     Q_OBJECT
     QD_PROPERTY(name, QString, m_name)
@@ -34,4 +34,4 @@ public:
     void setName(const QString &name) { m_name = name; }
 };
 
-#endif // CUTEDATA_TAG_H
+#endif // CGDATA_TAG_H

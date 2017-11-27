@@ -13,11 +13,11 @@
 * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-#ifndef CUTEDATA_DATAOBJECT_H
-#define CUTEDATA_DATAOBJECT_H
+#ifndef CGDATA_DATAOBJECT_H
+#define CGDATA_DATAOBJECT_H
 #pragma once
 
-#include "cutedata.h"
+#include "cgdata.h"
 #include <QObject>
 #include <QEnableSharedFromThis>
 #include <QList>
@@ -48,7 +48,7 @@
     Q_CLASSINFO(#name, "N-N:" #classname ":" #inverse)
 
 
-namespace CuteData
+namespace cg
 {
     class DataManager;
     class DataObject;
@@ -56,7 +56,7 @@ namespace CuteData
     typedef QSharedPointer<const DataObject> ConstDataObjectPtr;
     typedef QList<DataObjectPtr> DataObjects;
 
-    class CUTEDATA_API DataObject : public QObject, public QEnableSharedFromThis<DataObject>
+    class CGDATA_API DataObject : public QObject, public QEnableSharedFromThis<DataObject>
     {
         Q_OBJECT
             QD_PROPERTY(id, qint64, m_id)
@@ -108,4 +108,4 @@ namespace CuteData
 
 }
 
-#endif // CUTEDATA_DATAOBJECT_H
+#endif // CGDATA_DATAOBJECT_H

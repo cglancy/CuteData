@@ -13,14 +13,14 @@
 * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-#ifndef CUTEDATA_USER_H
-#define CUTEDATA_USER_H
+#ifndef CGDATA_USER_H
+#define CGDATA_USER_H
 #pragma once
 
 #include "dataobject.h"
 #include "datatypes.h"
 
-class User : public CuteData::DataObject
+class User : public cg::DataObject
 {
     Q_OBJECT
     QD_PROPERTY(name, QString, m_name)
@@ -42,4 +42,4 @@ public:
     void setEmail(const QString &email) { m_email = email; }
 };
 
-#endif // CUTEDATA_USER_H
+#endif // CGDATA_USER_H

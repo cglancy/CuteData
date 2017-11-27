@@ -14,6 +14,6 @@
 * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 #include <QtTest/QTest>
-#include "testcutedata.h"
+#include "datatest.h"
 
-QTEST_MAIN(TestCuteData)
+QTEST_MAIN(DataTest)

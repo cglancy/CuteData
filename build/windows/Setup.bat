@@ -4,8 +4,8 @@ set QMAKESPEC=win32-msvc
 
 call "%VSDIR%\VC\vcvarsall.bat" x64
 
-%QTDIR%\bin\qmake.exe -tp vc -r ../../CuteData.pro
+%QTDIR%\bin\qmake.exe -tp vc -r ../../cgData.pro
 
 set PATH=%PATH%;%QTDIR%\bin;%~dp0\src\debug
 
-devenv CuteData.sln
+devenv cgData.sln

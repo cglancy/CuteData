@@ -13,24 +13,24 @@
 * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-#ifndef CUTEDATA_H
-#define CUTEDATA_H
+#ifndef CGDATA_H
+#define CGDATA_H
 #pragma once
 
 #include <QtGlobal>
 
 #ifdef Q_OS_WIN32
 
-#ifdef CUTEDATA_EXPORTS
-#define CUTEDATA_API __declspec(dllexport)
+#ifdef CGDATA_EXPORTS
+#define CGDATA_API __declspec(dllexport)
 #else
-#define CUTEDATA_API __declspec(dllimport)
+#define CGDATA_API __declspec(dllimport)
 #endif
 
 #else
 
-#define CUTEDATA_API __attribute__((visibility("default")))
+#define CGDATA_API __attribute__((visibility("default")))
 
 #endif
 
-#endif // CUTEDATA_H
+#endif // CGDATA_H

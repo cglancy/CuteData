@@ -13,8 +13,8 @@
 * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-#ifndef CUTEDATA_TESTCUTEDATA_H
-#define CUTEDATA_TESTCUTEDATA_H
+#ifndef CGDATA_DATATEST_H
+#define CGDATA_DATATEST_H
 #pragma once
 
 #include "dataobject.h"
@@ -24,7 +24,12 @@
 #include <QDateTime>
 #include <QColor>
 
-class Class1 : public CuteData::DataObject
+namespace cg
+{
+    class DataManager;
+}
+
+class Class1 : public cg::DataObject
 {
     Q_OBJECT
     Q_PROPERTY(QString stringValue READ stringValue WRITE setStringValue)
@@ -89,12 +94,12 @@ private:
 
 typedef QSharedPointer<Class2> Class2Ptr;
 
-class TestCuteData : public QObject
+class DataTest : public QObject
 {
     Q_OBJECT
 public:
-    TestCuteData();
-    ~TestCuteData();
+    DataTest();
+    ~DataTest();
 
 private slots:
     void init();
@@ -103,7 +108,7 @@ private slots:
     void testDataModel();
 
 private:
-    CuteData::DataManager *m_pDataManager;
+    cg::DataManager *m_pDataManager;
 };
 
-#endif // CUTEDATA_TESTCUTEDATA_H
+#endif // CGDATA_DATATEST_H

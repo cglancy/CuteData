@@ -13,14 +13,14 @@
 * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-#ifndef CUTEDATA_POST_H
-#define CUTEDATA_POST_H
+#ifndef CGDATA_POST_H
+#define CGDATA_POST_H
 #pragma once
 
 #include "dataobject.h"
 #include "datatypes.h"
 
-class Post : public CuteData::DataObject
+class Post : public cg::DataObject
 {
     Q_OBJECT
     QD_PROPERTY(title, QString, m_title)
@@ -41,4 +41,4 @@ public:
     void setBody(const QString &body) { m_body = body; }
 };
 
-#endif // CUTEDATA_POST_H
+#endif // CGDATA_POST_H
