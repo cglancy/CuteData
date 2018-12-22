@@ -1014,6 +1014,9 @@ DataObjects DataManager::many(ConstDataObjectPtr pObject, const QMetaObject *pMe
 
 void DataManager::setOne(DataObjectPtr pObject, const QString &relationshipName, DataObjectPtr pTargetObject)
 {
+    if (!pTargetObject)
+        return;
+
     Table *pTable = m_tableMap.value(pObject->metaObject()->className());
     if (pTable)
     {
