@@ -293,6 +293,7 @@ bool DataManager::open(const QString &path)
                 query.prepare(QString("CREATE TABLE %1 (%2)").arg(pTable->name()).arg(columnsString));
                 if (query.exec())
                 {
+                    //qDebug() << "Table created: " << query.executedQuery();
                 }
                 else
                 {
@@ -340,6 +341,7 @@ void DataManager::createVirtualTable(const QString &tableName, const QStringList
     query.prepare(QString("CREATE VIRTUAL TABLE %1_fts USING fts5(%2)").arg(tableName).arg(queryString));
     if (query.exec())
     {
+        //qDebug() << "Virtual table created for " << tableName;
     }
     else
     {
@@ -359,6 +361,7 @@ void DataManager::createVirtualTable(const QString &tableName, const QStringList
         "INSERT INTO %1_fts(%2) VALUES(%3); END;").arg(tableName).arg(insertText).arg(newText));
     if (trigger1Query.exec())
     {
+        //qDebug() << "Success: " << trigger1Query.executedQuery();
     }
     else
     {
@@ -378,6 +381,7 @@ void DataManager::createVirtualTable(const QString &tableName, const QStringList
         .arg(tableName).arg(insertText).arg(oldText));
     if (trigger2Query.exec())
     {
+        //qDebug() << "Success: " << trigger2Query.executedQuery();
     }
     else
     {
@@ -391,6 +395,7 @@ void DataManager::createVirtualTable(const QString &tableName, const QStringList
         .arg(tableName).arg(insertText).arg(oldText).arg(newText));
     if (trigger3Query.exec())
     {
+        //qDebug() << "Success: " << trigger3Query.executedQuery();
     }
     else
     {
