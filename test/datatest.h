@@ -106,6 +106,7 @@ private slots:
     void cleanup();
     void testClass1Class2();
     void testDataModel();
+    void testTextSearch();
 
 private:
     cg::DataManager *m_pDataManager;

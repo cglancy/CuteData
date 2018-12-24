@@ -85,6 +85,18 @@ namespace cg
             return list;
         }
 
+        template <class T>
+        QList<QSharedPointer<T>> textSearch(const QString &text) const
+        {
+            DataObjects objects = textSearch(&T::staticMetaObject, text);
+
+            QList<QSharedPointer<T>> list;
+            for (auto &pObject : objects)
+                list.append(pObject.dynamicCast<T>());
+
+            return list;
+        }
+
         DataObjectPtr one(ConstDataObjectPtr pObject, const QMetaObject *pMetaObject, const QString &name) const;
         DataObjects many(ConstDataObjectPtr pObject, const QMetaObject *pMetaObject, const QString &name) const;
         void setOne(DataObjectPtr pObject, const QString &relationshipName, DataObjectPtr pTargetObject);
@@ -108,6 +120,9 @@ namespace cg
         DataObjects findAllObjects(const QMetaObject *pMetaObject) const;
         DataObjects findObjects(const QMetaObject *pMetaObject, const QVariantMap &map) const;
         void clearObjects();
+
+        void createVirtualTable(const QString &tableName, const QStringList &textColumnList);
+        DataObjects textSearch(const QMetaObject *pMetaObject, const QString &text) const;
 
     private:
         static QString toSQLiteTypeString(QVariant::Type type);

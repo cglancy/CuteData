@@ -270,6 +270,7 @@ bool DataManager::open(const QString &path)
             if (pMetaObject)
             {
                 QString columnsString;
+                QStringList textColumnsList;
                 int count = pMetaObject->propertyCount();
 
                 for (int i = 0; i < count; ++i)
@@ -283,18 +284,22 @@ bool DataManager::open(const QString &path)
                         columnsString += " primary key";
                     if (i != count - 1)
                         columnsString += ", ";
+
+                    if (property.type() == QVariant::String)
+                        textColumnsList.append(name);
                 }
 
                 QSqlQuery query;
                 query.prepare(QString("CREATE TABLE %1 (%2)").arg(pTable->name()).arg(columnsString));
                 if (query.exec())
                 {
-                    //qDebug() << "Table created for " << pTable->name();
                 }
                 else
                 {
                     qDebug() << "Error: Unable to create table for " << pTable->name();
                 }
+
+                createVirtualTable(pTable->name(), textColumnsList);
             }
             else if (pTable->relationship1() && pTable->relationship2())
             {
@@ -321,6 +326,101 @@ bool DataManager::open(const QString &path)
     emit databaseOpened();
 
     return true;
+}
+
+void DataManager::createVirtualTable(const QString &tableName, const QStringList &textColumnList)
+{
+    if (textColumnList.size() == 0)
+        return;
+
+    QString columnNames = textColumnList.join(", ");
+    QString queryString = QString("%1, content=%2, content_rowid=id").arg(columnNames).arg(tableName);
+
+    QSqlQuery query;
+    query.prepare(QString("CREATE VIRTUAL TABLE %1_fts USING fts5(%2)").arg(tableName).arg(queryString));
+    if (query.exec())
+    {
+    }
+    else
+    {
+        qDebug() << "Error: Unable to create virtual table for " << tableName;
+    }
+
+    QString insertText = "rowid, " + columnNames;
+
+    QStringList newList;
+    newList << "new.id";
+    for (auto & name : textColumnList)
+        newList << "new." + name;
+    QString newText = newList.join(", ");
+
+    QSqlQuery trigger1Query;
+    trigger1Query.prepare(QString("CREATE TRIGGER %1_ai AFTER INSERT ON %1 BEGIN "
+        "INSERT INTO %1_fts(%2) VALUES(%3); END;").arg(tableName).arg(insertText).arg(newText));
+    if (trigger1Query.exec())
+    {
+    }
+    else
+    {
+        qDebug() << "Error: " << trigger1Query.lastQuery();
+    }
+
+    QStringList oldList;
+    oldList << "'delete'";
+    oldList << "old.id";
+    for (auto & name : textColumnList)
+        oldList << "old." + name;
+    QString oldText = oldList.join(", ");
+
+    QSqlQuery trigger2Query;
+    trigger2Query.prepare(QString("CREATE TRIGGER %1_ad AFTER DELETE ON %1 BEGIN "
+        "INSERT INTO %1_fts(%1_fts, %2) VALUES(%3); END;")
+        .arg(tableName).arg(insertText).arg(oldText));
+    if (trigger2Query.exec())
+    {
+    }
+    else
+    {
+        qDebug() << "Error: " << trigger2Query.lastQuery();
+    }
+
+    QSqlQuery trigger3Query;
+    trigger3Query.prepare(QString("CREATE TRIGGER %1_au AFTER UPDATE ON %1 BEGIN "
+        "INSERT INTO %1_fts(%1_fts, %2) VALUES(%3);"
+        "INSERT INTO %1_fts(%2) VALUES(%4); END;")
+        .arg(tableName).arg(insertText).arg(oldText).arg(newText));
+    if (trigger3Query.exec())
+    {
+    }
+    else
+    {
+        qDebug() << "Error: " << trigger3Query.lastQuery();
+    }
+}
+
+DataObjects DataManager::textSearch(const QMetaObject * pMetaObject, const QString & text) const
+{
+    if (!pMetaObject)
+        return DataObjects();
+
+    DataObjects objects;
+
+    QSqlQuery searchQuery;
+    searchQuery.prepare(QString("SELECT rowid FROM %1_fts WHERE %1_fts MATCH '%2' ORDER BY rank")
+        .arg(pMetaObject->className()).arg(text));
+
+    if (searchQuery.exec())
+    {
+        while (searchQuery.next())
+        {
+            qint64 id = searchQuery.value(0).toLongLong();
+            DataObjectPtr pObject = findObject(pMetaObject, id);
+            if (pObject)
+                objects.append(pObject);
+        }
+    }
+
+    return objects;
 }
 
 DataObjectPtr DataManager::newObject(const QMetaObject *pMetaObject)

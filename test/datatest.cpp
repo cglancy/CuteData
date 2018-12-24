@@ -278,3 +278,30 @@ void DataTest::testDataModel()
         QCOMPARE(posts.size(), 0);
     }
 }
+
+void DataTest::testTextSearch()
+{
+    // create
+    {
+        UserPtr pUser1 = m_pDataManager->createObject<User>();
+        pUser1->init("User1", "user1@example.com");
+        pUser1->update();
+
+        UserProfilePtr pUserProfile1 = m_pDataManager->createObject<UserProfile>();
+        pUserProfile1->init(pUser1, "123 Address St.");
+        pUserProfile1->update();
+
+        PostPtr pPost1 = m_pDataManager->createObject<Post>();
+        pPost1->init(pUser1, "My first post", "The body of post 1.");
+        pPost1->update();
+
+        PostPtr pPost2 = m_pDataManager->createObject<Post>();
+        pPost2->init(pUser1, "My second post", "The body of post 2.");
+        pPost2->update();
+
+        Posts posts = m_pDataManager->textSearch<Post>("second post");
+        QCOMPARE(posts.size(), 1);
+        if (posts.size() > 0)
+            QVERIFY(posts.at(0) == pPost2);
+    }
+}
